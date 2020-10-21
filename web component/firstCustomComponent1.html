@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <title>first custom components1</title>
+  </head>
+  <body>
+    <!-- 使用自定义组件 -->
+    <user-card></user-card>
+    <!-- templete 标签不会展示出来只有用到的时候才会渲染 -->
+    <template id="userCardTemplate">
+        <img src="https://semantic-ui.com/images/avatar2/large/kristy.png" class="image">
+        <div class="container">
+          <p class="name">User Name</p>
+          <p class="email">yourmail@some-email.com</p>
+          <button class="button">Follow</button>
+        </div>
+      </template>
+    <script>
+      // 使用 <template> 标签 定义DOM元素
+      class UserCard extends HTMLElement {
+        constructor() {
+          super();
+          var templateElem = document.getElementById('userCardTemplate');
+          // 获取<template>节点以后，克隆了它的所有子元素
+          var content = templateElem.content.cloneNode(true);
+          this.appendChild(content);
+        }
+      }
+      window.customElements.define('user-card', UserCard);
+    </script>
+  </body>
+</html>
